@@ -7,6 +7,7 @@ public class GameListMenu : MonoBehaviour
 	public UIButton createMatchButton;
 	public UIButton leaveMatchButton;
 	public UIButton inviteFriendsButton;
+	public UIButton achievementsButton;
 
 	void Start()
 	{
@@ -19,14 +20,31 @@ public class GameListMenu : MonoBehaviour
 		createMatchButton.onClick += onCreateMatchButtonClick;
 		leaveMatchButton.onClick += onLeaveMatchButtonClick;
 		inviteFriendsButton.onClick += onInviteFriendsButtonClick;
+		achievementsButton.onClick += onAchievementsButtonClick;
+
+		SocialManager.onAuthenticationComplete += onAuthenticationComplete;
+		SocialManager.onAuthenticationFailed += onAuthenticationFailed;
 	}
 
 	private void onInitButtonClick()
 	{
 		Debug.Log ("INIT GOOGLE PLAY");
 
-		GooglePlayManager.init();
-		GooglePlayManager.authenticate ();
+		//GooglePlayManager.init();
+		//GooglePlayManager.authenticate ();
+
+		SocialManager.init ();
+		SocialManager.authenticate();
+	}
+
+	private void onAuthenticationComplete()
+	{
+		Debug.Log ("AUTHENTICATION COMPLETE");
+	}
+
+	private void onAuthenticationFailed()
+	{
+		Debug.Log ("AUTHENTICATION FAILED");
 	}
 
 	private void onCreateMatchButtonClick()
@@ -45,5 +63,11 @@ public class GameListMenu : MonoBehaviour
 	{
 		Debug.Log ("INVITE FRIENDS");
 		GooglePlayManager.createWithInvitationScreen ();
+	}
+
+	private void onAchievementsButtonClick()
+	{
+		Debug.Log ("SHOW ACHIEVEMENTS");
+		SocialManager.showAchievementsUI ();
 	}
 }

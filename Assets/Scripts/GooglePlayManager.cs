@@ -102,7 +102,7 @@ public class GooglePlayManager : MonoBehaviour
 		//This indicates whose turn is next (a participant ID)
 		string whoIsNext = turnBasedMatch.Participants[1].ParticipantId;
 
-		PlayGamesPlatform.Instance.TurnBased.TakeTurn(turnBasedMatch.MatchId, matchData, whoIsNext, onTakeTurnComplete);
+		PlayGamesPlatform.Instance.TurnBased.TakeTurn(turnBasedMatch, matchData, whoIsNext, onTakeTurnComplete);
 	}
 
 	private static void onTakeTurnComplete(bool success)
@@ -119,7 +119,7 @@ public class GooglePlayManager : MonoBehaviour
 
 	public static void leave()
 	{
-		PlayGamesPlatform.Instance.TurnBased.Leave(turnBasedMatch.MatchId, onLeaveComplete);
+		PlayGamesPlatform.Instance.TurnBased.Leave(turnBasedMatch, onLeaveComplete);
 	}
 
 	private static void onLeaveComplete(bool success)
@@ -141,10 +141,10 @@ public class GooglePlayManager : MonoBehaviour
 		//define the match's outcome
 		MatchOutcome matchOutcome = new MatchOutcome();
 
-		matchOutcome.SetParticipantResult(turnBasedMatch.Participants[0].ParticipantId, 0);
-		matchOutcome.SetParticipantResult(turnBasedMatch.Participants[1].ParticipantId, 1);
+		//matchOutcome.SetParticipantResult(turnBasedMatch.Participants[0].ParticipantId, 0);
+		//matchOutcome.SetParticipantResult(turnBasedMatch.Participants[1].ParticipantId, 1);
 
-		PlayGamesPlatform.Instance.TurnBased.Finish(turnBasedMatch.MatchId, matchData, matchOutcome, onMatchFinished);
+		PlayGamesPlatform.Instance.TurnBased.Finish(turnBasedMatch, matchData, matchOutcome, onMatchFinished);
 	}
 
 	private static void onMatchFinished(bool success)
