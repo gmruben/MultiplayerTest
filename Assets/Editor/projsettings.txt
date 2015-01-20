@@ -1,6 +1,3 @@
 lastUpgrade=00911
-proj.AppId=659027890482
+proj.AppId=580110935739
 android.SetupDone=true
-ios.ClientId=659027890482-bepipu6m8mk72l0t6nbrv7j6hb6u0usd.apps.googleusercontent.com
-ios.BundleId=com.byrese.ganbaresuperstrikers
-ios.SetupDone=true

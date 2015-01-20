@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
+
 public class GameListMenu : MonoBehaviour
 {
 	public UIButton initButton;
@@ -29,9 +33,6 @@ public class GameListMenu : MonoBehaviour
 	private void onInitButtonClick()
 	{
 		Debug.Log ("INIT GOOGLE PLAY");
-
-		//GooglePlayManager.init();
-		//GooglePlayManager.authenticate ();
 
 		SocialManager.init ();
 		SocialManager.authenticate();
@@ -67,7 +68,7 @@ public class GameListMenu : MonoBehaviour
 
 	private void onAchievementsButtonClick()
 	{
-		Debug.Log ("SHOW ACHIEVEMENTS");
-		SocialManager.showAchievementsUI ();
+		Debug.Log ("ACCEPT FROM INBOX");
+		GooglePlayManager.acceptFromInbox ();
 	}
 }

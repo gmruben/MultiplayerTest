@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 
 using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.Multiplayer;
 using UnityEngine.SocialPlatforms;
 
@@ -20,16 +21,16 @@ public class GooglePlayManager : MonoBehaviour
 
 	public static void init()
 	{
-		// recommended for debugging:
-		PlayGamesPlatform.DebugLogEnabled = true;
-		// Activate the Google Play Games platform
-		PlayGamesPlatform.Activate();
+		//Register an invitation delegate
+		PlayGamesPlatform.Instance.RegisterInvitationDelegate(onInvitationReceived);
+		//Register a match delegate
+		PlayGamesPlatform.Instance.TurnBased.RegisterMatchDelegate(onMatchReceived);
 	}
 
 	public static void authenticate()
 	{
 		//Authenticate user
-		Social.localUser.Authenticate(onAuthenticationComplete);
+		//Social.localUser.Authenticate(onAuthenticationComplete);
 	}
 
 	//Called when an invitation is received
