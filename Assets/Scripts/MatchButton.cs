@@ -9,8 +9,11 @@ public class MatchButton : MonoBehaviour
 	public UIButton sendTurnButton;
 	public UIButton finishMatchButton;
 
+	private MatchData matchData;
+
 	public void init(MatchData matchData)
 	{
+		this.matchData = matchData;
 		matchText.text = matchData.id + " - " + matchData.state;
 
 		sendTurnButton.onClick += onSendTurnButtonClick;
@@ -19,8 +22,10 @@ public class MatchButton : MonoBehaviour
 
 	private void onSendTurnButtonClick()
 	{
+		Debug.Log ("SEND TURN: " + matchData.id);
+
 		TurnBasedGameData gameData = new TurnBasedGameData();
-		GooglePlayManager.takeTurn (gameData);
+		GooglePlayManager.takeTurn (matchData.gameData);
 	}
 
 	private void onFinishMatchButtonClick()

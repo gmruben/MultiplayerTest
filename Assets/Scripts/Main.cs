@@ -21,7 +21,7 @@ public class Main : MonoBehaviour
 	{
 		if (GUI.Button(new Rect(0, 0, Screen.width, Screen.height * 0.20f), "START MATCH"))
 		{
-			GooglePlayManager.createWithInvitationScreen();
+			//GooglePlayManager.createWithInvitationScreen();
 		}
 		if (GooglePlayManager.isMyTurn)
 		{

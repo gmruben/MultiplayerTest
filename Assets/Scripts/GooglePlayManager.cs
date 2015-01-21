@@ -86,9 +86,9 @@ public class GooglePlayManager : MonoBehaviour
 		PlayGamesPlatform.Instance.TurnBased.CreateQuickMatch(numOpponents, numOpponents, 0, onMatchStarted);
 	}
 
-	public static void createWithInvitationScreen()
+	public static void createWithInvitationScreen(Action<bool, TurnBasedMatch> onMatchStartAction)
 	{
-		PlayGamesPlatform.Instance.TurnBased.CreateWithInvitationScreen(numOpponents, numOpponents, 0, onMatchStarted);
+		PlayGamesPlatform.Instance.TurnBased.CreateWithInvitationScreen (numOpponents, numOpponents, 0, onMatchStartAction); // onMatchStarted);
 	}
 
 	public static void acceptFromInbox()

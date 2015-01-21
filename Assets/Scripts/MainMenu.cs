@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
 		SocialManager.onAuthenticationComplete += onAuthenticationComplete;
 		SocialManager.onAuthenticationFailed += onAuthenticationFailed;
 
-		GooglePlayManager.onTurnBasedMatchStarted += onMatchStarted;
+		//GooglePlayManager.onTurnBasedMatchStarted += onMatchStarted;
 		GooglePlayManager.onGameDataReceived += onGameDataReceived;
 	}
 
@@ -94,7 +94,7 @@ public class MainMenu : MonoBehaviour
 	private void onInviteFriendsButtonClick()
 	{
 		Debug.Log ("INVITE FRIENDS");
-		GooglePlayManager.createWithInvitationScreen ();
+		GooglePlayManager.createWithInvitationScreen (onCreateMatch);
 	}
 
 	private void onShowMatchListButtonClick()
@@ -103,18 +103,32 @@ public class MainMenu : MonoBehaviour
 		openMatchListMenu ();
 	}
 
-	private void onMatchStarted(TurnBasedMatch match)
+	private void onCreateMatch(bool success, TurnBasedMatch match)
 	{
-		Debug.Log ("MATCH STARTED");
+		if (success)
+		{
+			Debug.Log ("MATCH CREATED");
 
-		MatchData matchData = new MatchData();
+			//Create Match data to store locally
+			MatchData matchData = new MatchData ();
 
-		matchData.id = match.MatchId;
-		matchData.state = MatchStateIds.Started;
+			matchData.id = match.MatchId;
+			matchData.state = MatchStateIds.Started;
 
-		matchData.p1TeamName = inputField.text;
+			matchData.p1TeamName = inputField.text;
 
-		MatchManager.addMatchData(matchData);
+			//Create Game Data
+			TurnBasedGameData gameData = new TurnBasedGameData ();
+			gameData.numTurn = 1;
+
+			matchData.gameData = gameData;
+
+			MatchManager.addMatchData (matchData);
+		}
+		else
+		{
+			Debug.Log ("COULDN'T CREATE MATCH");
+		}
 	}
 
 	private void onGameDataReceived(TurnBasedGameData gameData)
