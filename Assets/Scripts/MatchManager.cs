@@ -69,6 +69,9 @@ public class MatchData
 {
 	public string id;
 	public string state;
+
+	public string p1TeamName;
+	public string p2TeamName;
 	
 	public static MatchData parseJSonToMatchData(string json)
 	{

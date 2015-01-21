@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 using GooglePlayGames.BasicApi.Multiplayer;
 
-public class GameListMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
+	public InputField inputField;
+
 	public UIButton initButton;
 	public UIButton createMatchButton;
-	public UIButton leaveMatchButton;
+	public UIButton acceptFromInboxButton;
 	public UIButton inviteFriendsButton;
-	public UIButton achievementsButton;
+	public UIButton showMatchListButton;
+
+	public GameObject matchListMenuPrefab;
+	private MatchListMenu matchListMenu;
 
 	void Start()
 	{
@@ -20,12 +26,40 @@ public class GameListMenu : MonoBehaviour
 	{
 		initButton.onClick += onInitButtonClick;
 		createMatchButton.onClick += onCreateMatchButtonClick;
-		leaveMatchButton.onClick += onLeaveMatchButtonClick;
+		acceptFromInboxButton.onClick += onAcceptFromInboxButtonClick;
 		inviteFriendsButton.onClick += onInviteFriendsButtonClick;
-		achievementsButton.onClick += onAchievementsButtonClick;
+		showMatchListButton.onClick += onShowMatchListButtonClick;
 
 		SocialManager.onAuthenticationComplete += onAuthenticationComplete;
 		SocialManager.onAuthenticationFailed += onAuthenticationFailed;
+
+		GooglePlayManager.onTurnBasedMatchStarted += onMatchStarted;
+		GooglePlayManager.onGameDataReceived += onGameDataReceived;
+	}
+
+	private void setEnabled(bool isEnabled)
+	{
+		initButton.setActive (isEnabled);
+		createMatchButton.setActive (isEnabled);
+		acceptFromInboxButton.setActive (isEnabled);
+		inviteFriendsButton.setActive (isEnabled);
+		showMatchListButton.setActive (isEnabled);
+	}
+
+	private void openMatchListMenu()
+	{
+		setEnabled (false);
+
+		matchListMenu = (GameObject.Instantiate(matchListMenuPrefab) as GameObject).GetComponent<MatchListMenu>();
+		matchListMenu.init ();
+
+		matchListMenu.backButton.onClick += onMatchListMenuBackButtonClick;
+	}
+
+	private void onMatchListMenuBackButtonClick()
+	{
+		setEnabled (true);
+		GameObject.Destroy(matchListMenu.gameObject);
 	}
 
 	private void onInitButtonClick()
@@ -48,14 +82,13 @@ public class GameListMenu : MonoBehaviour
 
 	private void onCreateMatchButtonClick()
 	{
-		GooglePlayManager.onTurnBasedMatchStarted += onMatchStarted;
 		GooglePlayManager.createQuickMatch ();
 	}
 
-	private void onLeaveMatchButtonClick()
+	private void onAcceptFromInboxButtonClick()
 	{
-		Debug.Log ("LEAVE MATCH");
-		GooglePlayManager.leave ();
+		Debug.Log ("ACCEPT FROM INBOX");
+		GooglePlayManager.acceptFromInbox ();
 	}
 
 	private void onInviteFriendsButtonClick()
@@ -64,19 +97,28 @@ public class GameListMenu : MonoBehaviour
 		GooglePlayManager.createWithInvitationScreen ();
 	}
 
-	private void onAchievementsButtonClick()
+	private void onShowMatchListButtonClick()
 	{
-		Debug.Log ("ACCEPT FROM INBOX");
-		GooglePlayManager.acceptFromInbox ();
+		Debug.Log ("SHOW MATCH LIST");
+		openMatchListMenu ();
 	}
 
 	private void onMatchStarted(TurnBasedMatch match)
 	{
+		Debug.Log ("MATCH STARTED");
+
 		MatchData matchData = new MatchData();
 
 		matchData.id = match.MatchId;
 		matchData.state = MatchStateIds.Started;
 
+		matchData.p1TeamName = inputField.text;
+
 		MatchManager.addMatchData(matchData);
+	}
+
+	private void onGameDataReceived(TurnBasedGameData gameData)
+	{
+		Debug.Log ("GAME DATA RECEIVED");
 	}
 }
