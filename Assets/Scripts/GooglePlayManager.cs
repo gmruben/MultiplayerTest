@@ -11,7 +11,7 @@ public class GooglePlayManager : MonoBehaviour
 {
 	private const int numOpponents = 1;
 
-	public static Action onTurnBasedMatchStarted;
+	public static Action<TurnBasedMatch> onTurnBasedMatchStarted;
 	public static Action<TurnBasedGameData> onGameDataReceived;
 
 	private static TurnBasedMatch turnBasedMatch;
@@ -175,7 +175,7 @@ public class GooglePlayManager : MonoBehaviour
 			}
 			else
 			{
-				if (onTurnBasedMatchStarted != null) onTurnBasedMatchStarted();
+				if (onTurnBasedMatchStarted != null) onTurnBasedMatchStarted(match);
 			}
 
 			// I can only make a move if the match is active and it's my turn!

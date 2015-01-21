@@ -13,8 +13,8 @@ public class Main : MonoBehaviour
 		GooglePlayManager.authenticate();
 #endif
 
-		GooglePlayManager.onTurnBasedMatchStarted += onTurnBasedMatchStarted;
-		GooglePlayManager.onGameDataReceived += onGameDataReceived;
+		//ooglePlayManager.onTurnBasedMatchStarted += onTurnBasedMatchStarted;
+		//GooglePlayManager.onGameDataReceived += onGameDataReceived;
 	}
 
 	void OnGUI()
@@ -44,7 +44,7 @@ public class Main : MonoBehaviour
 
 	private void onTurnBasedMatchStarted()
 	{
-		GooglePlayManager.onTurnBasedMatchStarted -= onTurnBasedMatchStarted;
+		//GooglePlayManager.onTurnBasedMatchStarted -= onTurnBasedMatchStarted;
 
 		gameData = new TurnBasedGameData();
 		gameData.numTurn = 0;

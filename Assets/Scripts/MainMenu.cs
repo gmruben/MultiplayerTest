@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
-using UnityEngine.SocialPlatforms;
+using GooglePlayGames.BasicApi.Multiplayer;
 
 public class GameListMenu : MonoBehaviour
 {
@@ -50,7 +48,7 @@ public class GameListMenu : MonoBehaviour
 
 	private void onCreateMatchButtonClick()
 	{
-		Debug.Log ("CREATE QUICK MATCH");
+		GooglePlayManager.onTurnBasedMatchStarted += onMatchStarted;
 		GooglePlayManager.createQuickMatch ();
 	}
 
@@ -70,5 +68,15 @@ public class GameListMenu : MonoBehaviour
 	{
 		Debug.Log ("ACCEPT FROM INBOX");
 		GooglePlayManager.acceptFromInbox ();
+	}
+
+	private void onMatchStarted(TurnBasedMatch match)
+	{
+		MatchData matchData = new MatchData();
+
+		matchData.id = match.MatchId;
+		matchData.state = MatchStateIds.Started;
+
+		MatchManager.addMatchData(matchData);
 	}
 }
