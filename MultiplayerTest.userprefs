@@ -1,14 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MatchManager.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\FlyingTeddy\Assets\Scripts\UI\BeanTVMenu.cs">
     <Files>
-      <File FileName="Assets\Scripts\MatchListMenu.cs" Line="32" Column="2" />
-      <File FileName="Assets\Scripts\MainMenu.cs" Line="119" Column="57" />
-      <File FileName="Assets\Scripts\TurnBasedGameData.cs" Line="1" Column="14" />
-      <File FileName="Assets\Scripts\GooglePlayManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Main.cs" Line="7" Column="27" />
-      <File FileName="Assets\Scripts\MatchButton.cs" Line="12" Column="13" />
-      <File FileName="Assets\Scripts\MatchManager.cs" Line="66" Column="2" />
+      <File FileName="..\FlyingTeddy\Assets\Scripts\UI\BeanTVMenu.cs" Line="141" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

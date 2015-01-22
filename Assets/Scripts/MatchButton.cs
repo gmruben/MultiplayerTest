@@ -7,7 +7,7 @@ public class MatchButton : MonoBehaviour
 	public Text matchText;
 
 	public UIButton sendTurnButton;
-	public UIButton finishMatchButton;
+	public UIButton leaveMatchButton;
 
 	private MatchData matchData;
 
@@ -17,7 +17,7 @@ public class MatchButton : MonoBehaviour
 		matchText.text = matchData.id + " - " + matchData.state;
 
 		sendTurnButton.onClick += onSendTurnButtonClick;
-		finishMatchButton.onClick += onFinishMatchButtonClick;
+		leaveMatchButton.onClick += onLeaveMatchButtonClick;
 	}
 
 	private void onSendTurnButtonClick()
@@ -28,8 +28,10 @@ public class MatchButton : MonoBehaviour
 		GooglePlayManager.takeTurn (matchData.gameData);
 	}
 
-	private void onFinishMatchButtonClick()
+	private void onLeaveMatchButtonClick()
 	{
+		Debug.Log ("LEAVE MATCH: " + matchData.id);
+
 		TurnBasedGameData gameData = new TurnBasedGameData();
 		GooglePlayManager.finishMatch (gameData);
 	}

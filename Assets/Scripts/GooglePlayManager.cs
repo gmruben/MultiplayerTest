@@ -96,7 +96,7 @@ public class GooglePlayManager : MonoBehaviour
 		PlayGamesPlatform.Instance.TurnBased.AcceptFromInbox(onMatchStarted);
 	}
 
-	public static void takeTurn(TurnBasedGameData gameData)
+	public static void takeTurn(TurnBasedMatch turnBasedMatch, TurnBasedGameData gameData)
 	{
 		//Convert the game data to byte array
 		byte[] matchData = Util.ObjectToByteArray((object) gameData);
@@ -118,7 +118,7 @@ public class GooglePlayManager : MonoBehaviour
 		}
 	}
 
-	public static void leave()
+	public static void leave(TurnBasedMatch turnBasedMatch)
 	{
 		PlayGamesPlatform.Instance.TurnBased.Leave(turnBasedMatch, onLeaveComplete);
 	}

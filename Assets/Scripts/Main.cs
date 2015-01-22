@@ -28,7 +28,7 @@ public class Main : MonoBehaviour
 			if (GUI.Button(new Rect(0, Screen.height * 0.20f, Screen.width, Screen.height * 0.20f), "END TURN"))
 			{
 				gameData.numTurn++;
-				GooglePlayManager.takeTurn(gameData);
+				//GooglePlayManager.takeTurn(gameData);
 			}
 		}
 

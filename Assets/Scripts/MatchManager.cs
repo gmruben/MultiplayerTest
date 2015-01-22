@@ -38,6 +38,7 @@ public class MatchManager
 	public static void addMatchData(MatchData matchData)
 	{
 		matchDataList.Add(matchData);
+		storeMatchDataList ();
 	}
 
 	private static List<MatchData> retrieveMatchDataListFromJson(string data)
